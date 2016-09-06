@@ -14,7 +14,22 @@ class TasksController < ApplicationController
     end
   end
 
+  def edit
+    # @list = List.find(params[:id])
+    # @task = @list.tasks.find(params[:id])
+    @task = Task.find(params[:id])
+    @list = List.find(@task.list_id)
 
+  end
+
+  def update
+    @task= Task.find(params[:id])
+    if @task.update(task_params)
+      redirect_to list_path(@task.list)
+    else
+      render :edit
+    end
+  end
 
 
   private
